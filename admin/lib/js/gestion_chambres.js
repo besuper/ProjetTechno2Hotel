@@ -13,16 +13,17 @@ $(document).ready(() => {
     $(".delete").click(function () {
         if(confirm("Supprimer ?")) {
             let idChambre = $(this).attr("id");
-            let row = $(this).closest("tr");
-
-            row.css("background-color", "red");
-            row.fadeOut('slow');
 
             $.ajax({
                 type: "GET",
                 data: 'id=' + idChambre,
                 url: "./lib/php/ajax/delete_chambre.php",
-                success: () => {}
+                success: () => {
+                    let row = $(this).closest("tr");
+
+                    row.css("background-color", "red");
+                    row.fadeOut('slow');
+                }
             });
         }
     });
@@ -34,7 +35,9 @@ $(document).ready(() => {
     $("tr[id='row_chambre']").each(function () {
         $(this).hover(function (a) {
             if (a.type === "mouseenter") {
-                gl_image_chambre.attr("src", "images/" + $(this).attr("name") + ".jpg");
+                const img = $(this).find("td[name='image']").text();
+
+                gl_image_chambre.attr("src", "images/" + img);
                 gl_image_chambre.show();
             } else {
                 gl_image_chambre.hide();
@@ -52,13 +55,9 @@ $(document).ready(() => {
             let val2 = $(this).text();
 
             if (val1 !== val2) {
-                let param = "champ=" + name + "&id=" + id + "&val=" + val2;
-
-                console.log(param);
-
                 $.ajax({
                     type: "GET",
-                    data: param,
+                    data: "champ=" + name + "&id=" + id + "&val=" + val2,
                     url: "./lib/php/ajax/update_chambre.php",
                     success: () => {}
                 });

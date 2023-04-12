@@ -13,7 +13,7 @@ $nbr = count($chambres);
                 <input type="text" class="form-control" id="filter" placeholder="Filtrer"/>
             </p>
 
-            <button class="btn btn-primary">Ajouter chambre</button>
+            <a class="btn btn-primary" href="index.php?page=ajout_chambre.php">Ajouter chambre</a>
 
             <table class="table table-striped">
                 <thead>

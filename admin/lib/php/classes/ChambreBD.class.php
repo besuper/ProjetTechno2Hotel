@@ -9,6 +9,24 @@ class ChambreBD extends Chambre {
 		$this->_db = $cnx;
 	}
 
+	public function insert() {
+		try{
+			$query = "INSERT INTO chambre(nom_chambre, prix, lit, description, image_chambre) VALUES (?, ?, ?, ?, ?)";
+			$res = $this->_db->prepare($query);
+			return $res->execute(array(
+				$this->nom,
+				$this->prix,
+				$this->lit,
+				$this->description,
+				$this->image,
+			));
+		}catch(PDOException $e){
+			print "Echec ".$e->getMessage();
+		}
+
+		return 0;
+	}
+
 	public function updateChambre($id, $champ, $val) {
 		try{
 			$query = "UPDATE chambre SET $champ = :val WHERE id_chambre=:id";
