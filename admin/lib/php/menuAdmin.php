@@ -15,6 +15,10 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="index.php?page=clients.php">Clients</a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="index.php?page=deconnexion.php">Deconnexion</a>
                 </li>
 			</ul>

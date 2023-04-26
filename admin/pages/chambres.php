@@ -4,16 +4,17 @@ $chambres = $fl->getAllChambres();
 $nbr = count($chambres);
 ?>
 
+<script src="lib/js/filter.js"></script>
 <script src="lib/js/gestion_chambres.js"></script>
 
-<div class="fluid-container ps-4">
+<div class="container mt-4">
     <div class="row">
         <div class="col-8">
             <p>
                 <input type="text" class="form-control" id="filter" placeholder="Filtrer"/>
             </p>
 
-            <a class="btn btn-primary" href="index.php?page=ajout_chambre.php">Ajouter chambre</a>
+            <a class="btn btn-primary mb-2" href="index.php?page=ajout_chambre.php">Ajouter chambre</a>
 
             <table class="table table-striped">
                 <thead>

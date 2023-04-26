@@ -35,10 +35,6 @@ if (isset($_POST["submit"])) {
 	}
 
 	if (empty($errors)) {
-		// tout les champs sont vérifié
-
-		$cnx = Connexion::getInstance($dsn, $user, $pass);
-
 		$fl = new ChambreBD($cnx);
 		$fl->hydrate(array(
 			"nom" => $nom,
@@ -74,7 +70,7 @@ if (isset($_POST["submit"])) {
     <title>Admin - Ajout chambre</title>
 </head>
 <body>
-<div class="container-fluid">
+<div class="container-fluid mt-4">
     <h1>Ajout d'une chambre</h1>
 
     <form method="POST" enctype="multipart/form-data">

@@ -1,14 +1,14 @@
 $(document).ready(() => {
 
-    // Suppression d'une chambre
+    // Suppression d'un client
     $(".delete").click(function () {
         if(confirm("Supprimer ?")) {
-            let idChambre = $(this).attr("id");
+            let idClient = $(this).parent().attr("id");
 
             $.ajax({
                 type: "GET",
-                data: 'id=' + idChambre,
-                url: "./lib/php/ajax/delete_chambre.php",
+                data: 'id=' + idClient,
+                url: "./lib/php/ajax/delete_client.php",
                 success: () => {
                     let row = $(this).closest("tr");
 
@@ -17,23 +17,6 @@ $(document).ready(() => {
                 }
             });
         }
-    });
-
-    // Image hover
-    const gl_image_chambre = $("#gl_image_chambre");
-    gl_image_chambre.hide();
-
-    $("tr[id='row_chambre']").each(function () {
-        $(this).hover(function (a) {
-            if (a.type === "mouseenter") {
-                const img = $(this).find("td[name='image']").text();
-
-                gl_image_chambre.attr("src", "images/" + img);
-                gl_image_chambre.show();
-            } else {
-                gl_image_chambre.hide();
-            }
-        });
     });
 
     // Update
