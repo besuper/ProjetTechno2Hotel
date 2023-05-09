@@ -8,6 +8,10 @@ class ClientBD extends Client {
 		$this->_db = $cnx;
 	}
 
+	public function test() {
+		var_dump($this->nom);
+	}
+
 	public function insert() {
 		try{
 			$query = "INSERT INTO client(nom_client, prenom_client, mail_client, rue, numero_rue, id_ville, id_pays) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -47,6 +51,37 @@ class ClientBD extends Client {
 			$res->execute();
 			$data = $res->fetch();
 			return $data;
+		}catch(PDOException $e){
+			print "Echec ".$e->getMessage();
+		}
+	}
+
+	public function updateClient($id, $champ, $val) {
+		try{
+			$query = "UPDATE client SET $champ = :val WHERE id_client=:id";
+			$res = $this->_db->prepare($query);
+			$res->bindValue(':val', $val);
+			$res->bindValue(':id', $id);
+			$res->execute();
+		}catch(PDOException $e){
+			print "Echec ".$e->getMessage();
+		}
+	}
+
+	public function update() {
+		try{
+			$query = "UPDATE client SET nom_client = ?, prenom_client = ?, mail_client = ?, rue = ?, numero_rue = ?, id_Ville = ?, id_pays = ? WHERE id_client = ?";
+			$res = $this->_db->prepare($query);
+			return $res->execute(array(
+				$this->nom,
+				$this->prenom,
+				$this->mail,
+				$this->rue,
+				$this->numero_rue,
+				$this->id_ville,
+				$this->id_pays,
+				$this->id_client
+			));
 		}catch(PDOException $e){
 			print "Echec ".$e->getMessage();
 		}

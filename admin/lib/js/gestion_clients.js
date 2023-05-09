@@ -22,7 +22,7 @@ $(document).ready(() => {
     // Update
     $("td[contenteditable]").click(function () {
         let val1 = $(this).text();
-        let id = $(this).attr("id");
+        let id = $(this).parent().find("#id_client").text();
         let name = $(this).attr("name");
 
         $(this).blur(function () {
@@ -32,7 +32,7 @@ $(document).ready(() => {
                 $.ajax({
                     type: "GET",
                     data: "champ=" + name + "&id=" + id + "&val=" + val2,
-                    url: "./lib/php/ajax/update_chambre.php",
+                    url: "./lib/php/ajax/update_client.php",
                     success: () => {}
                 });
             }

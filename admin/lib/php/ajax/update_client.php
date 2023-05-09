@@ -7,4 +7,4 @@ require '../classes/ClientBD.class.php';
 $cnx = Connexion::getInstance($dsn,$user,$pass);
 
 $fl = new ClientBD($cnx);
-$fl->delete($_GET["id"]);
+$fl->updateClient($_GET["id"], $_GET["champ"], $_GET["val"]);

@@ -38,7 +38,7 @@ if (isset($_POST["submit"])) {
 			"prenom" => $prenom,
 			"mail" => $email,
 			"rue" => $rue,
-			"numero_rue" => $numero_rue,
+			"numero_rue" => $num_rue,
 			"id_ville" => $choix_ville,
 			"id_pays" => $choix_pays
 		));

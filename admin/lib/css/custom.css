@@ -4,6 +4,10 @@
     font-family: 'Poppins', sans-serif;
 }
 
+body {
+    height: 100vh;
+}
+
 .pointer {
     cursor: pointer;
 }

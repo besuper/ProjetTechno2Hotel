@@ -40,12 +40,12 @@ $nbr = count($clients);
 						echo '
                 <tr id="row_client" name="' . $cl->nom_client . '">
                     <th name="id_client" id="id_client">' . $cl->id_client . '</th>
-                    <td contenteditable="true" name="nom" id="' . $cl->nom_client . '">' . $cl->nom_client . '</td>
-                    <td contenteditable="true" name="prenom" id="' . $cl->prenom_client . '">' . $cl->prenom_client . '</td>
-                    <td contenteditable="true" name="mail" id="' . $cl->mail_client . '">' . $cl->mail_client . '</td>
+                    <td contenteditable="true" name="nom_client">' . $cl->nom_client . '</td>
+                    <td contenteditable="true" name="prenom_client">' . $cl->prenom_client . '</td>
+                    <td contenteditable="true" name="mail_client">' . $cl->mail_client . '</td>
                     <td contenteditable="false" name="adresse">' . $cl->rue . ', ' . $cl->numero_rue . ' ' . $cl->ville . ' ' . $cl->pays . '</td>
                     <td id="' . $cl->id_client . '">
-                        <a href="index.php?page=client.php&id=1" class="btn btn-primary">Voir</a>
+                        <a href="index.php?page=client.php&id='.$cl->id_client.'" class="btn btn-primary">Voir</a>
                         <i class="bi bi-trash-fill btn btn-danger delete"></i>
                     </td>
                 </tr>
