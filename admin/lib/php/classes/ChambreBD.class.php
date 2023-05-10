@@ -11,14 +11,31 @@ class ChambreBD extends Chambre {
 
 	public function insert() {
 		try{
-			$query = "INSERT INTO chambre(nom_chambre, prix, lit, description, image_chambre) VALUES (?, ?, ?, ?, ?)";
+			$query = "INSERT INTO chambre(nom_chambre, prix, lit, description, image_chambre) VALUES (?, ?, ?, ?, ?) RETURNING id_chambre";
 			$res = $this->_db->prepare($query);
-			return $res->execute(array(
+			$res->execute(array(
 				$this->nom,
 				$this->prix,
 				$this->lit,
 				$this->description,
 				$this->image,
+			));
+
+			return $res->fetch();
+		}catch(PDOException $e){
+			print "Echec ".$e->getMessage();
+		}
+
+		return 0;
+	}
+
+	public function ajoutOption($id_option) {
+		try{
+			$query = "INSERT INTO chambre_options(id_chambre, id_options) VALUES (?, ?)";
+			$res = $this->_db->prepare($query);
+			return $res->execute(array(
+				$this->id_chambre,
+				$id_option
 			));
 		}catch(PDOException $e){
 			print "Echec ".$e->getMessage();
@@ -40,6 +57,15 @@ class ChambreBD extends Chambre {
 	}
 
 	public function deleteChambre($id) {
+		try{
+			$query = "DELETE FROM chambre_options WHERE id_chambre=:id";
+			$res = $this->_db->prepare($query);
+			$res->bindValue(':id', $id);
+			$res->execute();
+		}catch(PDOException $e){
+			print "Echec ".$e->getMessage();
+		}
+
 		try{
 			$query = "DELETE FROM chambre WHERE id_chambre=:id";
 			$res = $this->_db->prepare($query);
