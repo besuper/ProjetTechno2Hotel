@@ -73,4 +73,25 @@ class OptionBD extends Option {
 		}
 	}
 
+	public function getChambreOptions($id) {
+		try {
+			$query = "SELECT nom_options, supplement FROM chambre_options s INNER JOIN option o ON o.id_options = s.id_options WHERE id_chambre = ?";
+
+			$req = $this->_db->prepare($query);
+			$req->execute(array($id));
+
+			while($data = $req->fetch()) {
+				$this->_retour[] = new Chambre($data);
+			}
+
+			if(empty($this->_retour)){
+				return null;
+			}
+
+			return $this->_retour;
+		}catch(PDOException $e) {
+			print "Erreur " . $e->getMessage();
+		}
+	}
+
 }

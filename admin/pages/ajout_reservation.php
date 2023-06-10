@@ -1,5 +1,10 @@
 <?php
 
+if(!isset($_GET["client"])) {
+	header("Location: index.php?page=chambres.php");
+	return;
+}
+
 $errors = [];
 
 if (isset($_POST["submit"])) {
@@ -49,10 +54,10 @@ if (isset($_POST["submit"])) {
 		if (array_key_exists('id_chambre', $executed)) {
 			$fl->id_chambre = $executed["id_chambre"];
 
-			if(isset($options)) {
+			if (isset($options)) {
 				// $options
 
-				for($j = 0; $j < count($options); $j++) {
+				for ($j = 0; $j < count($options); $j++) {
 					$option = $options[$j];
 
 					$fl->ajoutOption($option);
@@ -61,7 +66,7 @@ if (isset($_POST["submit"])) {
 
 			if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
 				// tout est ok
-				header("Location: ./index.php?page=chambres.php");
+				//header("Location: ./index.php?page=chambres.php");
 			} else {
 				$errors["global"] = "Impossible d'upload l'image";
 			}
@@ -71,85 +76,61 @@ if (isset($_POST["submit"])) {
 	}
 }
 
-$optionsBD = new OptionBD($cnx);
-$options = $optionsBD->getAll();
+$id_client = $_GET["client"];
+
+$clientBD = new ClientBD($cnx);
+$client = $clientBD->getClientByID($id_client);
+
+$chambreBD = new ChambreBD($cnx);
+$chambres = $chambreBD->getAllChambres();
 
 ?>
 
 <script src="lib/js/gestion_options.js"></script>
 
 <div class="container-fluid mt-4">
-	<h1>Ajout d'une chambre</h1>
+	<h1>Ajout d'une réservation</h1>
 
 	<form method="POST" enctype="multipart/form-data">
 		<div class="row">
-			<div class="col-6">
-				<label for="nom" class="form-label">Nom de chambre</label>
-				<input type="text" class="form-control" id="nom" name="nom">
+			<div class="col-3">
+				<label for="nom" class="form-label">Nom</label>
+				<input type="text" class="form-control" id="nom" name="nom" value="<?php echo $client['nom_client']; ?>" disabled>
+			</div>
 
-				<div id="error"
-					 class="form-text text-danger"><?php echo isset($errors["nom"]) ? $errors["nom"] : ''; ?></div>
+			<div class="col-3">
+				<label for="prenom" class="form-label">Prenom</label>
+				<input type="text" class="form-control" id="prenom" name="prenom" value="<?php echo $client['prenom_client']; ?>" disabled>
 			</div>
 		</div>
 
 		<div class="row mt-4">
 			<div class="col-3">
-				<label for="prix" class="form-label">Prix</label>
-				<input type="number" min="0" class="form-control" id="prix" name="prix">
-
-				<div id="error"
-					 class="form-text text-danger"><?php echo isset($errors["prix"]) ? $errors["prix"] : ''; ?></div>
+				<label for="dateDebut" class="form-label">Date debut</label>
+				<input type="text" class="form-control" id="dateDebut" name="dateDebut">
 			</div>
 
 			<div class="col-3">
-				<label for="lits" class="form-label">Nombre de lits</label>
-				<input type="number" min="0" class="form-control" id="lits" name="lits">
-
-				<div id="error"
-					 class="form-text text-danger"><?php echo isset($errors["lits"]) ? $errors["lits"] : ''; ?></div>
+				<label for="duree" class="form-label">Duree (jours)</label>
+				<input type="number" min="1" class="form-control" id="duree" name="duree">
 			</div>
 		</div>
 
 		<div class="row mt-4">
 			<div class="col-6">
-				<label for="description" class="form-label">Description</label>
-				<textarea class="form-control" placeholder="Description de la chambre" name="description"
-						  id="description" style="height: 100px"></textarea>
-
-				<div id="error"
-					 class="form-text text-danger"><?php echo isset($errors["description"]) ? $errors["description"] : ''; ?></div>
-			</div>
-		</div>
-
-		<div class="row mt-4">
-			<div class="col-4">
-				<label for="image" class="form-label">Image</label>
-				<input class="form-control" type="file" name="image" id="image">
-
-				<div id="error"
-					 class="form-text text-danger"><?php echo isset($errors["image"]) ? $errors["image"] : ''; ?></div>
-			</div>
-		</div>
-
-		<div class="row mt-4">
-			<div class="col-6">
-				<div class="d-flex">
-					<label for="options" class="form-label">Options</label>
-					<span class="btn btn-primary ms-4 mb-2" data-bs-toggle="modal" data-bs-target="#ajoutOption">
-						Ajouter
-					</span>
-				</div>
-
-				<select class="form-select" multiple id="options" name="options[]" aria-label="multiple select example">
+				<label for="chambre" class="form-label">Choix de la chambre</label>
+				<select class="form-select" id="chambre" aria-label="Default select example">
 					<?php
-					for ($i = 0; $i < count($options); $i++) {
-						$option = $options[$i];
+					for($i = 0; $i < count($chambres); $i++) {
+						$chambre = $chambres[$i];
 
-						echo '<option value="' . $option->id_options . '">' . $option->nom_options . ' | Supplément : ' . $option->supplement . '€</option>';
+						echo '<option value="'.$chambre->id_chambre.'">'.$chambre->nom_chambre.' | Prix: '.$chambre->prix.'€</option>';
 					}
 
 					?>
 				</select>
+
+				<div id="error" class="form-text text-danger"><?php echo isset($errors["prix"]) ? $errors["prix"] : ''; ?></div>
 			</div>
 		</div>
 

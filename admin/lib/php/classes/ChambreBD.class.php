@@ -76,6 +76,19 @@ class ChambreBD extends Chambre {
 		}
 	}
 
+	public function getChambreByID($id){
+		try{
+			$query="select * from chambre where id_chambre = :id";
+			$res = $this->_db->prepare($query);
+			$res->bindValue(':id',$id);
+			$res->execute();
+			$data = $res->fetch();
+			return $data;
+		}catch(PDOException $e){
+			print "Echec ".$e->getMessage();
+		}
+	}
+
 	public function getAllChambres() {
 		try {
 			$query = "SELECT * FROM chambre ORDER BY id_chambre";
