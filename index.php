@@ -14,7 +14,7 @@ include 'admin/lib/php/adminListeInclude.php';
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"/>
-	<link rel="stylesheet" type="text/css" href="./lib/css/style.css"/>
+	<link rel="stylesheet" type="text/css" href="admin/lib/css/custom.css"/>
 </head>
 <body>
 <div id="wrapper">

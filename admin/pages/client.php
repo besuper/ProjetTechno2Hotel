@@ -181,7 +181,7 @@ if(isset($_POST["submit"])) {
 
 					echo '
                 <tr id="row_reservation">
-                    <td name="date_debut" id="date_debut">' . $res->rest_date_debut . '</td>
+                    <td name="date_debut" id="date_debut">' . $res->res_date_debut . '</td>
                     <td name="date_fin" id="date_fin">' . $res->res_date_fin . '</td>
                     <td name="personne" id="personne">' . $res->personne . '</td>
                     <td name="cout" id="cout">' . $res->cout . '</td>

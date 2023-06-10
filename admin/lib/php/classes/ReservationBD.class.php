@@ -8,6 +8,27 @@ class ReservationBD extends Reservation {
 		$this->_db = $cnx;
 	}
 
+	public function insert(){
+		try{
+			$query="select ajout_reservation(?, ?, ?, ?, ?, ?)";
+			$res = $this->_db->prepare($query);
+			$res->execute(array(
+				$this->date_debut,
+				$this->duree,
+				$this->personne,
+				$this->cout,
+				$this->id_client,
+				$this->id_chambre,
+			));
+			$data = $res->fetch();
+			return $data;
+		}catch(PDOException $e){
+			print "Echec ".$e->getMessage();
+		}
+
+		return 0;
+	}
+
 	public function getClientReservations($id) {
 		try {
 			$query = "SELECT * FROM reservation where id_client = ?";
@@ -33,7 +54,7 @@ class ReservationBD extends Reservation {
 
 	public function cancel($debut, $fin, $id_chambre) {
 		try{
-			$query = "DELETE FROM reservation WHERE rest_date_debut = ? AND res_date_fin = ? AND id_chambre = ?";
+			$query = "DELETE FROM reservation WHERE res_date_debut = ? AND res_date_fin = ? AND id_chambre = ?";
 			$res = $this->_db->prepare($query);
 			$res->execute(array(
 				$debut,
