@@ -66,4 +66,27 @@ class ReservationBD extends Reservation {
 		}
 	}
 
+	public function getAllReservations() {
+		try {
+			$query = "SELECT * FROM reservation";
+
+			$req = $this->_db->prepare($query);
+			$req->execute();
+
+			while($data = $req->fetch()) {
+				$this->_retour[] = new Reservation($data);
+			}
+
+			if(empty($this->_retour)){
+				return [];
+			}
+
+			return $this->_retour;
+		}catch(PDOException $e) {
+			print "Erreur " . $e->getMessage();
+		}
+
+		return [];
+	}
+
 }
