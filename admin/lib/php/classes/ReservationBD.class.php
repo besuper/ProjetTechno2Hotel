@@ -66,6 +66,21 @@ class ReservationBD extends Reservation {
 		}
 	}
 
+	public function getReservationByID($id){
+		try{
+			$query="select * from reservation where id_reservation = :id";
+			$res = $this->_db->prepare($query);
+			$res->bindValue(':id',$id);
+			$res->execute();
+			$data = $res->fetch();
+			return $data;
+		}catch(PDOException $e){
+			print "Echec ".$e->getMessage();
+		}
+
+		return null;
+	}
+
 	public function getAllReservations() {
 		try {
 			$query = "SELECT * FROM reservation";

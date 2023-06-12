@@ -26,6 +26,7 @@ $nbr = count($reservations);
                     <th scope="col">Cout</th>
                     <th scope="col">Chambre</th>
                     <th scope="col">Client</th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -42,6 +43,7 @@ $nbr = count($reservations);
                     <td>' . $res->cout . '</td>
                     <td>' . $res->id_chambre . '</td>
                     <td><a href="index.php?page=client.php&id='.$res->id_client.'">' . $res->id_client . '</a></td>
+                    <td><a href="pages/pdf.php?id='.$res->id_reservation.'" target="_blank"><i class="bi bi-download"></i></a></td>
                 </tr>
                 ';
 					}
