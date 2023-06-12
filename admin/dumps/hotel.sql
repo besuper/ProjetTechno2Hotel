@@ -5,7 +5,7 @@
 -- Dumped from database version 15.0
 -- Dumped by pg_dump version 15.0
 
--- Started on 2023-06-10 13:46:18
+-- Started on 2023-06-12 13:06:22
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -517,9 +517,7 @@ ALTER TABLE ONLY public.ville ALTER COLUMN id_ville SET DEFAULT nextval('public.
 -- Data for Name: admin; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.admin (id_admin, login, password) FROM stdin;
-1	admin	admin
-\.
+INSERT INTO public.admin VALUES (1, 'admin', 'admin');
 
 
 --
@@ -528,15 +526,13 @@ COPY public.admin (id_admin, login, password) FROM stdin;
 -- Data for Name: chambre; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.chambre (id_chambre, nom_chambre, prix, lit, description, image_chambre) FROM stdin;
-7	X-Large	60	4	Chambre qui possède beaucoup de lit	Kaboom-xLarge-1.jpg
-28	4 Friends	60	4	Chambre modeste pour des amis (friends)	Kaboom-4family-1.jpg
-29	4 Family	80	4	Cette chambre possède des lits super posé	Kaboom-friends-1.jpg
-30	4 Family – Large	80	4	Grand chambre parfaite pour la famille	Kaboom-4family-large-1.jpg
-31	Basic Urban	39	2	Chambre très basique	Kaboom-Basic-urban-1.jpg
-32	Medium Urban	45	2	Plus petite que la large	Kaboom-Medium-urban-1.jpg
-33	Large Urban	55	2	Chambre plus confortable parfait pour un couple	Kaboom-Large-urban-2.jpg
-\.
+INSERT INTO public.chambre VALUES (7, 'X-Large', 60, 4, 'Chambre qui possède beaucoup de lit', 'Kaboom-xLarge-1.jpg');
+INSERT INTO public.chambre VALUES (28, '4 Friends', 60, 4, 'Chambre modeste pour des amis (friends)', 'Kaboom-4family-1.jpg');
+INSERT INTO public.chambre VALUES (29, '4 Family', 80, 4, 'Cette chambre possède des lits super posé', 'Kaboom-friends-1.jpg');
+INSERT INTO public.chambre VALUES (30, '4 Family – Large', 80, 4, 'Grand chambre parfaite pour la famille', 'Kaboom-4family-large-1.jpg');
+INSERT INTO public.chambre VALUES (31, 'Basic Urban', 39, 2, 'Chambre très basique', 'Kaboom-Basic-urban-1.jpg');
+INSERT INTO public.chambre VALUES (32, 'Medium Urban', 45, 2, 'Plus petite que la large', 'Kaboom-Medium-urban-1.jpg');
+INSERT INTO public.chambre VALUES (33, 'Large Urban', 55, 2, 'Chambre plus confortable parfait pour un couple', 'Kaboom-Large-urban-2.jpg');
 
 
 --
@@ -545,21 +541,19 @@ COPY public.chambre (id_chambre, nom_chambre, prix, lit, description, image_cham
 -- Data for Name: chambre_options; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.chambre_options (id_chambre, id_options) FROM stdin;
-28	12
-28	13
-29	12
-29	16
-30	12
-30	13
-30	16
-31	12
-32	12
-32	13
-33	12
-33	13
-33	14
-\.
+INSERT INTO public.chambre_options VALUES (28, 12);
+INSERT INTO public.chambre_options VALUES (28, 13);
+INSERT INTO public.chambre_options VALUES (29, 12);
+INSERT INTO public.chambre_options VALUES (29, 16);
+INSERT INTO public.chambre_options VALUES (30, 12);
+INSERT INTO public.chambre_options VALUES (30, 13);
+INSERT INTO public.chambre_options VALUES (30, 16);
+INSERT INTO public.chambre_options VALUES (31, 12);
+INSERT INTO public.chambre_options VALUES (32, 12);
+INSERT INTO public.chambre_options VALUES (32, 13);
+INSERT INTO public.chambre_options VALUES (33, 12);
+INSERT INTO public.chambre_options VALUES (33, 13);
+INSERT INTO public.chambre_options VALUES (33, 14);
 
 
 --
@@ -568,10 +562,14 @@ COPY public.chambre_options (id_chambre, id_options) FROM stdin;
 -- Data for Name: client; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.client (id_client, nom_client, prenom_client, mail_client, rue, numero_rue, id_ville, id_pays) FROM stdin;
-1	Doe	John	john.doe@gmail.com	Rue du rue	21	1	1
-2	Bernard	Jojone	jojo.bernard@gmail.com	Rue du pasrue	14	1	1
-\.
+INSERT INTO public.client VALUES (1, 'Doe', 'John', 'john.doe@gmail.com', 'Rue du rue', 21, 1, 1);
+INSERT INTO public.client VALUES (2, 'Bernard', 'Jojone', 'jojo.bernard@gmail.com', 'Rue du pasrue', 14, 1, 1);
+INSERT INTO public.client VALUES (5, 'Ruel', 'Latimer', 'LatimerRuel@jourrapide.com', 'Route de Neufchateau', 59, 8, 1);
+INSERT INTO public.client VALUES (6, 'Cloutier', 'Théophile ', 'TheophileCloutier@dayrep.com', 'Rue de Piétrain', 193, 4, 1);
+INSERT INTO public.client VALUES (7, 'Guimond', 'Ignace', 'IgnaceGuimond@rhyta.com', 'Ramselsesteenweg', 24, 6, 1);
+INSERT INTO public.client VALUES (8, 'Laux', 'Agrican ', 'AgricanLaux@teleworm.us', 'Place Fayat', 186, 7, 1);
+INSERT INTO public.client VALUES (9, 'Guay', 'Germain ', 'GermainGuay@armyspy.com', 'Blancefloerlaan ', 65, 5, 1);
+INSERT INTO public.client VALUES (10, 'Huard', 'Senior ', 'SeniorHuard@rhyta.com', 'Rue Camille Joset', 496, 3, 1);
 
 
 --
@@ -580,8 +578,6 @@ COPY public.client (id_client, nom_client, prenom_client, mail_client, rue, nume
 -- Data for Name: employe; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.employe (id_employe, nom_employe, prenom_employe, num_tel_employe) FROM stdin;
-\.
 
 
 --
@@ -590,8 +586,6 @@ COPY public.employe (id_employe, nom_employe, prenom_employe, num_tel_employe) F
 -- Data for Name: entretien; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.entretien (id_chambre, id_employe, date_entretien) FROM stdin;
-\.
 
 
 --
@@ -600,12 +594,10 @@ COPY public.entretien (id_chambre, id_employe, date_entretien) FROM stdin;
 -- Data for Name: option; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.option (id_options, nom_options, supplement) FROM stdin;
-12	Wifi	10
-13	TV	8
-14	Mini bar	25
-16	Climatisation	25
-\.
+INSERT INTO public.option VALUES (12, 'Wifi', 10);
+INSERT INTO public.option VALUES (13, 'TV', 8);
+INSERT INTO public.option VALUES (14, 'Mini bar', 25);
+INSERT INTO public.option VALUES (16, 'Climatisation', 25);
 
 
 --
@@ -614,9 +606,7 @@ COPY public.option (id_options, nom_options, supplement) FROM stdin;
 -- Data for Name: pays; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.pays (id_pays, nom) FROM stdin;
-1	Belgique
-\.
+INSERT INTO public.pays VALUES (1, 'Belgique');
 
 
 --
@@ -625,9 +615,9 @@ COPY public.pays (id_pays, nom) FROM stdin;
 -- Data for Name: reservation; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.reservation (res_date_debut, res_date_fin, personne, cout, id_client, id_chambre, id_reservation) FROM stdin;
-2023-06-15	2023-06-22	1	45	2	32	7
-\.
+INSERT INTO public.reservation VALUES ('2023-06-15', '2023-06-22', 1, 45, 2, 32, 7);
+INSERT INTO public.reservation VALUES ('2023-07-05', '2023-07-17', 1, 39, 6, 31, 8);
+INSERT INTO public.reservation VALUES ('2023-09-24', '2023-10-01', 1, 60, 7, 28, 9);
 
 
 --
@@ -636,9 +626,14 @@ COPY public.reservation (res_date_debut, res_date_fin, personne, cout, id_client
 -- Data for Name: ville; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.ville (id_ville, nom) FROM stdin;
-1	Mons
-\.
+INSERT INTO public.ville VALUES (1, 'Mons');
+INSERT INTO public.ville VALUES (2, 'Charleroi');
+INSERT INTO public.ville VALUES (3, 'Villers-Saint-Amand');
+INSERT INTO public.ville VALUES (4, 'Rumillies');
+INSERT INTO public.ville VALUES (5, 'Vellereille-les-Brayeux');
+INSERT INTO public.ville VALUES (6, 'Tilff');
+INSERT INTO public.ville VALUES (7, 'Hodeige');
+INSERT INTO public.ville VALUES (8, 'Hendrieken');
 
 
 --
@@ -665,7 +660,7 @@ SELECT pg_catalog.setval('public.chambre_id_chambre_seq', 33, true);
 -- Name: client_id_client_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.client_id_client_seq', 4, true);
+SELECT pg_catalog.setval('public.client_id_client_seq', 10, true);
 
 
 --
@@ -701,7 +696,7 @@ SELECT pg_catalog.setval('public.pays_id_pays_seq', 1, true);
 -- Name: reservation_id_reservation_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.reservation_id_reservation_seq', 7, true);
+SELECT pg_catalog.setval('public.reservation_id_reservation_seq', 9, true);
 
 
 --
@@ -710,7 +705,7 @@ SELECT pg_catalog.setval('public.reservation_id_reservation_seq', 7, true);
 -- Name: ville_id_ville_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.ville_id_ville_seq', 1, true);
+SELECT pg_catalog.setval('public.ville_id_ville_seq', 8, true);
 
 
 --
@@ -866,7 +861,7 @@ ALTER TABLE ONLY public.reservation
     ADD CONSTRAINT reservation_id_client_fkey FOREIGN KEY (id_client) REFERENCES public.client(id_client);
 
 
--- Completed on 2023-06-10 13:46:19
+-- Completed on 2023-06-12 13:06:22
 
 --
 -- PostgreSQL database dump complete
