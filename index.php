@@ -38,7 +38,7 @@ include 'admin/lib/php/adminListeInclude.php';
 		if (file_exists($path)) {
 			include($path);
 		} else {
-			// include('./pages/page404.php');
+			include('./pages/404.php');
 		}
 
 		?>
